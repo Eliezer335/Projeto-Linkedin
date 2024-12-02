@@ -8,9 +8,6 @@ let publicacaoObj = [
 
 ]
 
-
-
-
 function mostrarInput() {
     var inputContainer = document.getElementById("inputContainer");
     inputContainer.classList.add("show"); // Adiciona a classe 'show' para exibir o input
@@ -48,11 +45,6 @@ function fecharAba(nome){
     elemento.style.display="none";
 }
 
-
-
-
-
-
 function adicionaPublicacao() {
     const comeceUmaPublicacao = document.getElementById("todas_publicacoes");
     const legendaPublicacao = document.getElementById("inputTextArea");
@@ -60,8 +52,7 @@ function adicionaPublicacao() {
     const imagemContainer = document.getElementById("imageContainer")
     const imagemAdicionada = document.querySelector(".imagemAdicionada")
 
-    console.log(imagemPublicacao)
-    console.log(imagemAdicionada)
+    console.log("imageInput", imagemPublicacao)
 
     const novaPublicacao = {
         legenda: legendaPublicacao.value,
@@ -126,15 +117,18 @@ function adicionaPublicacao() {
 }
 
 function adicionaLocalStorage(){
-
-    const publicacoesRegistradas = JSON.parse(localStorage.getItem("publicacaoObj"))
-    console.log("registradas ",publicacoesRegistradas)
-
+    let publicacoesRegistradas = [];
+    const PublicacoesDoSorage = JSON.parse(localStorage.getItem("publicacaoObj"));
+    if (PublicacoesDoSorage) {
+        publicacoesRegistradas.push(...PublicacoesDoSorage)
+    } else {
+        publicacoesRegistradas = publicacaoObj;
+        const publicacoes = JSON.stringify(publicacaoObj);
+        localStorage.setItem("publicacaoObj", publicacoes)
+    }
+    
     for (let objeto of publicacoesRegistradas) {
-        
-
-
-        comeceUmaPublicacao.innerHTML += `
+        comeceUmaPubli.innerHTML += `
             
                 <div class="comece_uma_publicacao" id="publicacao_01">
                     <div class="cabecario_publicacao">
